@@ -1,0 +1,44 @@
+* {
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/*Satrt Custom Style*/
+.cover-preview{
+    max-height : 500px;
+    border-radius : 8px;
+}
+/*End Custom Style*/
+
+
+/* Start Override SweetAlert2 */
+.swal2-title, .swal2-html-container {
+    color: #fff !important;
+}
+
+div:where(.swal2-container) div:where(.swal2-popup) {
+    background: #1a0933;
+}
+/* End Override SweetAlert2 */

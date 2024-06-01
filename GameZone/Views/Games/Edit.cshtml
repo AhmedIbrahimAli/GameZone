@@ -1,0 +1,86 @@
+﻿@model GameEditViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h5>
+    <i class=" bi bi-plus-circle-dotted"></i>
+    Edit @Model.Name
+</h5>
+
+
+<form asp-action="Edit" asp-controller="Games" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6">
+
+            @*
+            <div>
+                <label  asp-for="Name" class="form-label mt-4"></label>
+                <input type="hidden" class="form-control" asp-for="Id" value="@Model.Id">
+                <span asp-validation-for="Id" class="text-danger   ">  </span>
+            </div>
+            *@
+
+            <div>
+                <label asp-for="Name" class="form-label mt-4"></label>
+                <input type="text" class="form-control" asp-for="Name" placeholder="Name">
+                <span asp-validation-for="Name" class="text-danger">  </span>
+            </div>
+
+            <div>
+                <label asp-for="CategoryID" class="form-label mt-4">Categories</label>
+                <select class="form-select" asp-for="CategoryID" asp-items="Model.Categories">
+                    <option value="">Select a Category</option>
+                </select>
+                <span asp-validation-for="CategoryID" class="text-danger">  </span>
+            </div>
+
+            <div>
+                <label asp-for="SelectedDevices" class="form-label mt-4">Supported Devices</label>
+                <select class="form-select" asp-for="SelectedDevices" asp-items="Model.Devices">
+                    <option value="">Select  Devices</option>
+                </select>
+                <span asp-validation-for="SelectedDevices" class="text-danger">  </span>
+            </div>
+
+
+            <div>
+                <label asp-for="Description" class="form-label mt-4"></label>
+                <textarea asp-for="Description" class="form-control" placeholder="Write Description Here"></textarea>
+                <span asp-validation-for="Description" class="text-danger">  </span>
+            </div>
+
+
+            <div>
+                <label asp-for="Cover" class="form-label mt-4"></label>
+                <input type="file" class="form-control" asp-for="Cover"
+                       data-rule-extension="@FileSettings.allowedExtentions.Replace("." , string.Empty)"
+                       data-msg-extension="Not Allowed Extention"
+                       data-rule-filesize="@FileSettings.MaxFileSizeInBytes"
+                       data-msg-filesize="Max Size  Allowed is @FileSettings.MaxFileSizeInMB MB!">
+
+                <small class="form-text text-muted">Only @FileSettings.allowedExtentions Are Allowed With Size @(FileSettings.MaxFileSizeInMB)MB!.</small>
+                <span asp-validation-for="Cover" class="text-danger d-block"></span>
+            </div>
+
+
+            <button type="submit" class="btn btn-light text-black mt-4">Save</button>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center pt-4 overflow-hidden">
+
+            <img class="cover-preview " src="@($"{FileSettings.imagesFolder}/{Model.DisplayImgString}")" alt="Cover Image" />
+
+        </div>
+
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/file-size-validator.js" asp-append-version="true"></script>
+    <script src="~/js/display-image.js" asp-append-version="true"></script>
+
+
+}
+
+
